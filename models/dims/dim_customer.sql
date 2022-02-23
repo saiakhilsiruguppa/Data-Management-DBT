@@ -25,7 +25,3 @@ FROM {{ ref('stage_customer') }} c
 JOIN {{ source('mysql_rds_sakila', 'address') }} a ON c.address_id = a.address_id
 JOIN {{ source('mysql_rds_sakila', 'city') }} ci ON a.city_id = ci.city_id
 JOIN {{ source('mysql_rds_sakila', 'country') }} co ON ci.country_id = co.country_id
-
-
-
-
