@@ -1,10 +1,15 @@
 {{ config(materialized='table')}}
 
-select
-    staff_id as staff_key,
-    store_id as store_key,
-    address_id as adress_key,
-    CONCAT_WS(' ', last_name, first_name) as full_name,
-    username as staff_username
-from
-    {{ ref('stage_staff') }}
+SELECT 	
+    {{ dbt_utils.surrogate_key(['s.staff_id']) }} as STAFF_KEY,
+    s.staff_id,
+	s.first_name,
+	s.last_name,
+	CONCAT (FIRST_NAME,	',',LAST_NAME) AS firstlastname,
+	s.email,
+	CASE s.ACTIVE
+		WHEN 'TRUE'
+			THEN 'Yes'
+		ELSE 'No'
+		END AS active
+FROM {{ ref('stage_staff') }} s
