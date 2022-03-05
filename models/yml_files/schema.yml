@@ -20,10 +20,10 @@ models:
                 - unique
                 - not_null
 
-    - name: stage_actor
+    - name: stg_actor
       description: "Test not null actors"
       columns:
-          - name: actor_id
+          - name: ACTOR_ID
             description: "The primary key for this table"
             tests:
                 - unique
